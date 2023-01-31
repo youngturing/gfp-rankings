@@ -104,7 +104,7 @@ data = get_countries(years=list_of_years,content=cards_content)
 # Clean column names.
 data = data.rename(columns={'2009 (No Update)':'2009', '2008 (No Update)': '2008'})
 # Save data to .csv file
-data.to_csv('C:/Users/miko5/Desktop/TDS/gfp_rankings.csv')
+data.to_csv('gfp_rankings.csv')
 # Plot data at scatter plot.
 list_of_countries = ['Poland','Germany','Japan','Pakistan']
 list_of_years = ['2018','2019','2020','2021','2022','2023']
