@@ -93,6 +93,7 @@ def create_plot_with_countries_comparison(object: Dict, list_of_years: List[str]
     plt.gca().invert_yaxis()
     plt.title('Positions comparison in GFP ranking over time')
     plt.grid()
+    plt.yticks([x for x in range(1,26)])
     plt.show()
 
 # Srcape data from globalfirepower.com
