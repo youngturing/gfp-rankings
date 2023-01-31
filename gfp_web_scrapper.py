@@ -1,6 +1,5 @@
 import requests
 from typing import List, Dict
-import itertools
 
 import pandas as pd
 import numpy as np
