@@ -68,9 +68,10 @@ def get_countries_positions(data: pd.DataFrame, list_of_countries: List[str], li
     """
     data_sliced = data[list_of_years]
     stats_over_years = {}
-    for year, country in zip(list_of_years, list_of_countries):
-        positions = [np.where(data_sliced[one_year] == country)[0][0] + 1 for one_year in list_of_years]
-        stats_over_years[country] = positions
+    for year in list_of_years:
+        for country in list_of_countries:
+            positions = [np.where(data_sliced[one_year] == country)[0][0] + 1 for one_year in list_of_years]
+            stats_over_years[country] = positions
     return stats_over_years
 
 
