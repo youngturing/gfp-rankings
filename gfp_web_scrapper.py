@@ -52,7 +52,11 @@ def get_countries(years: List, content) -> pd.DataFrame:
     return df
 
 
-def get_countries_positions(data: pd.DataFrame, list_of_countries: List[str], list_of_years: List[str]):
+def get_countries_positions(
+    data: pd.DataFrame,
+    list_of_countries: List[str],
+    list_of_years: List[str]
+) -> Dict:
     """
     Gets countries' postions in rankigs across the years.
 
@@ -97,6 +101,7 @@ def create_plot_with_countries_comparison(object: Dict, list_of_years: List[str]
     plt.yticks([x for x in range(1,26)])
     plt.show()
 
+
 # Srcape data from globalfirepower.com
 # Get list of years.
 list_of_years = get_years(content=years)
@@ -107,7 +112,7 @@ data = data.rename(columns={'2009 (No Update)':'2009', '2008 (No Update)': '2008
 # Save data to .csv file
 data.to_csv('gfp_rankings.csv')
 # Plot data at scatter plot.
-list_of_countries = ['Poland','Germany','Japan','Pakistan']
+list_of_countries = ['Poland','Germany','Japan','Pakistan','Spain']
 list_of_years = ['2018','2019','2020','2021','2022','2023']
 stats_over_years = get_countries_positions(data=data,
                                            list_of_countries=list_of_countries,
