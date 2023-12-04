@@ -21,11 +21,11 @@ def get_years(content) -> List[str]:
 
     Parameters
     ----------
-    content - html content of globalfirepower.com page
+        content - html content of globalfirepower.com page
 
     Returns
     -------
-    list_of_years: List[str] - list of years of all rankings
+        list_of_years: List[str] - list of years of all rankings
     """
     list_of_years = [year.string for year in content]
     return list_of_years
@@ -35,11 +35,11 @@ def get_countries(years: List, content) -> pd.DataFrame:
     """
     Parameters
     ----------
-    content - html content of globalfirepower.com page - rankings over the years
+        content - html content of globalfirepower.com page - rankings over the years
 
     Returns
     -------
-    df: pd.DataFrame - data frame with positions of top 25 countires accros all years
+        df: pd.DataFrame - data frame with positions of top 25 countires accros all years
     """
     stats = {}
     for year, one_year in zip(years, content):
@@ -62,13 +62,13 @@ def get_countries_positions(
 
     Parameters
     ----------
-    data: pd.DataFrame - dataframe object mapping years to countries' positions
-    list_of_countries: List[str] - list with countries to filter
-    list_of_years: List[str] - years to get the rankings from
+        data: pd.DataFrame - dataframe object mapping years to countries' positions
+        list_of_countries: List[str] - list with countries to filter
+        list_of_years: List[str] - years to get the rankings from
 
     Returns
     -------
-    stats_over_years : Dict - dictionary with countries postions across the years.
+        stats_over_years : Dict - dictionary with countries postions across the years.
     """
     data_sliced = data[list_of_years]
     stats_over_years = {}
@@ -83,12 +83,12 @@ def create_plot_with_countries_comparison(object: Dict, list_of_years: List[str]
     """
     Parameters
     ----------
-    object: Dict -  dataframe object mapping years to countries' positions
-    list_of_years: List[str] - list with years to compare
+        object: Dict -  dataframe object mapping years to countries' positions
+        list_of_years: List[str] - list with years to compare
 
     Returns
     -------
-    Plot comparing requested countires over years
+        Plot comparing requested countires over years
     """
     for country in object:
         plt.plot(list_of_years, object[country], linestyle="-", marker="o", label=country)
@@ -106,7 +106,10 @@ def create_plot_with_countries_comparison(object: Dict, list_of_years: List[str]
 # Get list of years.
 list_of_years = get_years(content=years)
 # Get rankings across the years.
-data = get_countries(years=list_of_years,content=cards_content)
+data = get_countries(
+    years=list_of_years,
+    content=cards_content,
+)
 # Clean column names.
 data = data.rename(columns={'2009 (No Update)':'2009', '2008 (No Update)': '2008'})
 # Save data to .csv file
@@ -114,8 +117,12 @@ data.to_csv('gfp_rankings.csv')
 # Plot data at scatter plot.
 list_of_countries = ['Poland','Germany','Japan','Pakistan','Spain']
 list_of_years = ['2018','2019','2020','2021','2022','2023']
-stats_over_years = get_countries_positions(data=data,
-                                           list_of_countries=list_of_countries,
-                                           list_of_years=list_of_years)
-create_plot_with_countries_comparison(object=stats_over_years,
-                                      list_of_years=list_of_years)
+stats_over_years = get_countries_positions(
+    data=data,
+    list_of_countries=list_of_countries,
+    list_of_years=list_of_years,
+)
+create_plot_with_countries_comparison(
+    object=stats_over_years,
+    list_of_years=list_of_years,
+)
